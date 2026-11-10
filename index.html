@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>For Sarauniya 💜</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+html,body{
+ width:100%;height:100%;overflow:hidden;
+ background:#030006;font-family:Arial,sans-serif;
+}
+
+#app{
+ position:relative;width:100%;height:100dvh;
+ overflow:hidden;
+ background:
+ radial-gradient(ellipse at 12% 50%,rgba(255,0,120,.12),transparent 48%),
+ radial-gradient(ellipse at 88% 50%,rgba(125,0,255,.16),transparent 48%),
+ #030006;color:white;
+}
+
+/* INTRO */
+
+#intro{
+ position:absolute;inset:0;z-index:5;
+ display:flex;flex-direction:column;
+ justify-content:center;align-items:center;
+ text-align:center;padding:30px;
+ transition:opacity 1s ease,transform 1s ease;
+}
+
+.intro-star{
+ color:#e8caff;font-size:32px;
+ text-shadow:0 0 12px #d18aff,0 0 35px #a000ff;
+ animation:starPulse 2s infinite alternate;
+ margin-bottom:35px;
+}
+
+.intro-title{
+ font-family:Georgia,serif;
+ font-size:clamp(27px,7vw,36px);
+ font-weight:normal;line-height:1.5;
+ color:#f8eaff;
+ text-shadow:0 0 20px rgba(190,90,255,.5);
+}
+
+.intro-small{
+ margin-top:17px;color:#bda4ca;
+ font-size:11px;letter-spacing:3px;
+}
+
+#open{
+ margin-top:48px;padding:16px 35px;
+ border:1px solid rgba(226,145,255,.8);
+ border-radius:40px;color:white;
+ background:linear-gradient(100deg,rgba(255,0,115,.2),rgba(130,0,255,.25));
+ box-shadow:0 0 15px rgba(255,0,130,.2),0 0 30px rgba(135,0,255,.2);
+ font-size:11px;letter-spacing:4px;cursor:pointer;
+ animation:buttonGlow 2s infinite alternate;
+}
+
+#open:active{transform:scale(.96)}
+
+@keyframes starPulse{
+ from{opacity:.55;transform:scale(.9)}
+ to{opacity:1;transform:scale(1.2)}
+}
+
+@keyframes buttonGlow{
+ from{box-shadow:0 0 10px rgba(255,0,130,.2),0 0 15px rgba(135,0,255,.15)}
+ to{box-shadow:0 0 24px rgba(255,0,130,.45),0 0 35px rgba(135,0,255,.4)}
+}
+
+#intro.hide{
+ opacity:0;transform:scale(1.06);pointer-events:none;
+}
+
+/* REVEAL */
+
+#reveal{
+ position:absolute;inset:0;
+ display:flex;align-items:center;justify-content:center;
+ opacity:0;visibility:hidden;
+ transition:opacity 1.3s ease;
+}
+
+#reveal.show{opacity:1;visibility:visible}
+
+.ambient{
+ position:absolute;width:75vw;height:75vw;
+ max-width:500px;max-height:500px;
+ border-radius:50%;filter:blur(65px);
+ opacity:.13;pointer-events:none;
+}
+
+.ambient.pink{background:#ff008c;left:-35%;top:25%}
+.ambient.purple{background:#8300ff;right:-35%;top:25%}
+
+.heart-wrap{
+ position:relative;width:min(94vw,520px);
+ aspect-ratio:600/500;transform:translateY(-5%);
+}
+
+svg{width:100%;height:100%;overflow:visible}
+
+/* HEART OUTLINE */
+
+.heart-base{
+ fill:none;stroke:url(#heartGradient);
+ stroke-width:3;stroke-linecap:round;
+ stroke-linejoin:round;opacity:.75;
+ filter:drop-shadow(0 0 5px #bd65ff)
+        drop-shadow(0 0 14px #a000ff);
+ stroke-dasharray:1100;
+ stroke-dashoffset:1100;
+}
+
+#reveal.show .heart-base{
+ animation:drawHeart 3s ease forwards;
+}
+
+@keyframes drawHeart{to{stroke-dashoffset:0}}
+
+/* LONG TRAVELLING NEON TRAILS */
+
+.runner{
+ fill:none;
+ stroke-linecap:round;
+ stroke-linejoin:round;
+ stroke-width:10;
+ stroke-dasharray:260 740;
+ stroke-dashoffset:0;
+ opacity:0;
+}
+
+.runner.pink{
+ stroke:#ff168f;
+ filter:
+ drop-shadow(0 0 6px #ff168f)
+ drop-shadow(0 0 14px #ff168f)
+ drop-shadow(0 0 27px #ff008c);
+}
+
+.runner.purple{
+ stroke:#b66aff;
+ filter:
+ drop-shadow(0 0 6px #b66aff)
+ drop-shadow(0 0 14px #a000ff)
+ drop-shadow(0 0 27px #8b00ff);
+}
+
+#reveal.show .runner{
+ opacity:1;
+ animation:travel 4.5s linear infinite;
+ animation-delay:2.5s;
+}
+
+#reveal.show .runner.purple{
+ animation-name:travelBack;
+ animation-delay:2.5s;
+}
+
+/* EXTRA SOFT GLOW BEHIND THE LONG TRAILS */
+
+.runner-halo{
+ fill:none;
+ stroke-linecap:round;
+ stroke-width:21;
+ stroke-dasharray:285 715;
+ opacity:0;
+}
+
+.runner-halo.pink{
+ stroke:#ff168f;
+ filter:blur(9px);
+}
+
+.runner-halo.purple{
+ stroke:#9b40ff;
+ filter:blur(9px);
+}
+
+#reveal.show .runner-halo{
+ opacity:.5;
+ animation:travel 4.5s linear infinite;
+ animation-delay:2.5s;
+}
+
+#reveal.show .runner-halo.purple{
+ animation-name:travelBack;
+ animation-delay:2.5s;
+}
+
+/* WHITE-HOT LIGHT HEAD */
+
+.runner-head{
+ fill:none;stroke-width:3;
+ stroke-linecap:round;
+ stroke-dasharray:8 992;
+ opacity:0;
+}
+
+.runner-head.pink{
+ stroke:#fff0fa;
+ filter:drop-shadow(0 0 8px #ff168f);
+}
+
+.runner-head.purple{
+ stroke:#f5eaff;
+ filter:drop-shadow(0 0 8px #a000ff);
+}
+
+#reveal.show .runner-head{
+ opacity:1;
+ animation:travel 4.5s linear infinite;
+ animation-delay:2.5s;
+}
+
+#reveal.show .runner-head.purple{
+ animation-name:travelBack;
+ animation-delay:2.5s;
+}
+
+@keyframes travel{
+ from{stroke-dashoffset:0}
+ to{stroke-dashoffset:-1000}
+}
+
+@keyframes travelBack{
+ from{stroke-dashoffset:0}
+ to{stroke-dashoffset:1000}
+}
+
+/* CENTRE WORDS */
+
+.heart-words{
+ position:absolute;top:51%;left:50%;
+ width:100%;transform:translate(-50%,-50%);
+ text-align:center;opacity:0;pointer-events:none;
+}
+
+#reveal.show .heart-words{
+ animation:wordsAppear 1.5s ease 2.7s forwards;
+}
+
+.love{
+ font-size:clamp(23px,7vw,36px);
+ font-weight:800;letter-spacing:5px;
+ color:#fff;white-space:nowrap;
+ text-shadow:0 0 8px white,0 0 18px #ff4ab0,0 0 32px #a000ff;
+}
+
+.her-name{
+ margin-top:12px;font-family:Georgia,serif;
+ font-style:italic;font-size:clamp(17px,4.5vw,23px);
+ letter-spacing:3px;color:#e6c5ff;
+ text-shadow:0 0 15px #a000ff;
+}
+
+@keyframes wordsAppear{to{opacity:1}}
+
+/* BACKGROUND NAMES */
+
+.bg-name{
+ position:absolute;color:#c18aff;opacity:.16;
+ font-family:Georgia,serif;font-style:italic;
+ letter-spacing:2px;font-size:12px;
+ pointer-events:none;
+}
+
+.bg1{top:13%;left:9%}
+.bg2{top:16%;right:8%}
+.bg3{bottom:25%;left:7%}
+.bg4{bottom:25%;right:7%}
+
+/* MESSAGE AND DUA */
+
+.promise{
+ position:absolute;bottom:5%;
+ left:50%;transform:translateX(-50%);
+ width:88%;max-width:360px;
+ text-align:center;opacity:0;
+}
+
+#reveal.show .promise{
+ animation:wordsAppear 1.8s ease 4.5s forwards;
+}
+
+.promise p{
+ color:#d9c5e9;font-family:Georgia,serif;
+ font-size:13px;line-height:1.8;
+ text-shadow:0 0 12px rgba(174,93,255,.35);
+}
+
+.promise .dua{
+ margin-top:13px;
+ color:#e0bdff;font-family:Georgia,serif;
+ font-size:12px;font-style:italic;
+ line-height:1.7;
+ text-shadow:0 0 13px rgba(170,85,255,.55);
+}
+
+.promise .signature{
+ margin-top:13px;color:#c58bff;
+ font-size:10px;letter-spacing:4px;
+}
+
+</style>
+</head>
+
+<body>
+<div id="app">
+
+<section id="intro">
+ <div class="intro-star">✦</div>
+
+ <h1 class="intro-title">
+  There is something<br>
+  I want you to know...
+ </h1>
+
+ <p class="intro-small">JUST FOR YOU, MY LOVE</p>
+
+ <button id="open">TAP HERE ✦</button>
+</section>
+
+<section id="reveal">
+
+ <div class="ambient pink"></div>
+ <div class="ambient purple"></div>
+
+ <div class="bg-name bg1">My Queen ♛</div>
+ <div class="bg-name bg2">Hayati</div>
+ <div class="bg-name bg3">My Darling</div>
+ <div class="bg-name bg4">Mrs Muhammad 💜</div>
+
+ <div class="heart-wrap">
+  <svg viewBox="0 0 600 500">
+
+   <defs>
+    <linearGradient id="heartGradient" x1="0" y1="0" x2="1" y2="0">
+     <stop offset="0%" stop-color="#ff168f"/>
+     <stop offset="48%" stop-color="#d18aff"/>
+     <stop offset="100%" stop-color="#9c38ff"/>
+    </linearGradient>
+   </defs>
+
+   <!-- HEART PATH -->
+   <path
+    d="M300 145
+    C255 78 173 53 111 105
+    C29 173 93 292 165 358
+    C220 410 270 452 300 470
+    C330 452 380 410 435 358
+    C507 292 571 173 489 105
+    C427 53 345 78 300 145"
+    pathLength="1000"
+    class="heart-base"/>
+
+   <!-- PINK SOFT HALO -->
+   <path
+    d="M300 145
+    C255 78 173 53 111 105
+    C29 173 93 292 165 358
+    C220 410 270 452 300 470
+    C330 452 380 410 435 358
+    C507 292 571 173 489 105
+    C427 53 345 78 300 145"
+    pathLength="1000"
+    class="runner-halo pink"/>
+
+   <!-- PURPLE SOFT HALO -->
+   <path
+    d="M300 145
+    C255 78 173 53 111 105
+    C29 173 93 292 165 358
+    C220 410 270 452 300 470
+    C330 452 380 410 435 358
+    C507 292 571 173 489 105
+    C427 53 345 78 300 145"
+    pathLength="1000"
+    class="runner-halo purple"/>
+
+   <!-- PINK TRAVELLING LIGHT -->
+   <path
+    d="M300 145
+    C255 78 173 53 111 105
+    C29 173 93 292 165 358
+    C220 410 270 452 300 470
+    C330 452 380 410 435 358
+    C507 292 571 173 489 105
+    C427 53 345 78 300 145"
+    pathLength="1000"
+    class="runner pink"/>
+
+   <!-- PURPLE TRAVELLING LIGHT -->
+   <path
+    d="M300 145
+    C255 78 173 53 111 105
+    C29 173 93 292 165 358
+    C220 410 270 452 300 470
+    C330 452 380 410 435 358
+    C507 292 571 173 489 105
+    C427 53 345 78 300 145"
+    pathLength="1000"
+    class="runner purple"/>
+
+   <!-- WHITE LIGHT HEADS -->
+   <path
+    d="M300 145
+    C255 78 173 53 111 105
+    C29 173 93 292 165 358
+    C220 410 270 452 300 470
+    C330 452 380 410 435 358
+    C507 292 571 173 489 105
+    C427 53 345 78 300 145"
+    pathLength="1000"
+    class="runner-head pink"/>
+
+   <path
+    d="M300 145
+    C255 78 173 53 111 105
+    C29 173 93 292 165 358
+    C220 410 270 452 300 470
+    C330 452 380 410 435 358
+    C507 292 571 173 489 105
+    C427 53 345 78 300 145"
+    pathLength="1000"
+    class="runner-head purple"/>
+
+  </svg>
+
+  <div class="heart-words">
+   <div class="love">I LOVE YOU</div>
+   <div class="her-name">Sarauniya 💜</div>
+  </div>
+ </div>
+
+ <div class="promise">
+  <p>
+   I will never stop loving you.<br>
+   I will never give up on us.<br>
+   I believe in our dreams, and I have faith
+   that Allah will make our Nikkah easy
+   and bring everything together beautifully,
+   Insha'Allah.
+  </p>
+
+  <div class="dua">
+   May Allah make our love a home of
+   sakinah, mercy and barakah. Ameen. 🤍
+  </div>
+
+  <div class="signature">FOREVER YOURS — MUHAMMAD</div>
+ </div>
+
+</section>
+</div>
+
+<script>
+const intro=document.getElementById("intro");
+const reveal=document.getElementById("reveal");
+const open=document.getElementById("open");
+
+open.addEventListener("click",()=>{
+ intro.classList.add("hide");
+
+ setTimeout(()=>{
+  reveal.classList.add("show");
+ },450);
+});
+</script>
+
+</body>
+</html>
